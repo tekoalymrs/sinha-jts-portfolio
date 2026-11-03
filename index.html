@@ -9,11 +9,12 @@
 </head>
 <body>
 <header class="hero">
-  <img class="logo" src="sinha_jts_logo.png" alt="Sinha_jts logo" width="160" height="160">
+  <img class="logo" src="sinha_jts_logo_animated.gif" alt="Sinha_jts logo" width="160" height="160">
   <h1>Sinha_jts</h1>
   <p class="name">A.T.M. Mahfuzar Rahman Sinha</p>
   <p class="tagline">Student &amp; builder of practical web tools — focused on software people can actually use.</p>
   <p class="location">Dhaka, Bangladesh</p>
+  <p class="stats"><span><strong>8</strong> tools built</span><span><strong>2</strong> in Vibe96 review</span><span><strong>5</strong> new builds pending demo</span></p>
   <nav class="nav">
     <a href="#about">About</a>
     <a href="#work">Work</a>
@@ -33,9 +34,10 @@
 
   <section id="work">
     <h2>Work</h2>
-    <p class="note">Statuses are shown honestly, as of the latest update. Nothing here is claimed as published or sold unless it actually is.</p>
+    <p class="note">Statuses are shown honestly, as of the latest update. Nothing here is claimed as published or sold unless it actually is. Last updated: 4 November 2026.</p>
+    <p class="filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="review">In review</button><button class="filter" data-filter="appeal">Appeal pending</button><button class="filter" data-filter="pending">Demos pending</button></p>
 
-    <article class="card">
+    <article class="card" data-status="review">
       <h3>ShelfWise — POS &amp; Inventory</h3>
       <p class="meta">Multi-store point of sale for small retail &middot; Status: In human review on Vibe96 &middot; SUB-2026-1047 &middot; $149</p>
       <p><strong>Problem:</strong> Small retailers need one place to sell, track stock across stores, and see what is running low.</p>
@@ -43,23 +45,23 @@
       <p><a href="https://shelfwise-pos-demo.onrender.com/login">Try the live demo</a> <span class="hint">(free-tier hosting — it may take a moment to wake up)</span></p>
     </article>
 
-    <article class="card">
+    <article class="card" data-status="review">
       <h3>PharmaDesk — Pharmacy Management</h3>
       <p class="meta">Pharmacy management system &middot; Status: In human review on Vibe96 &middot; SUB-2026-1051 &middot; $149 &middot; Audit 77/100</p>
       <p><strong>Problem:</strong> Independent pharmacies need medicine and batch tracking, expiry alerts, prescriptions, and billing in one system.</p>
       <p><strong>Stack:</strong> Python 3.12 standard library only, SQLite, server-rendered HTML. Features include batch and expiry tracking with FIFO dispensing, suppliers and purchase orders, VAT billing with receipt, and reports.</p>
-      <p><a href="https://pharmadesk-demo.onrender.com">Try the live demo</a></p>
+      <p><a href="https://pharmadesk-demo.onrender.com">Try the live demo</a> <span class="hint">(free-tier hosting — it may take a moment to wake up)</span></p>
     </article>
 
-    <article class="card">
+    <article class="card" data-status="appeal">
       <h3>GlowBook — Salon, Spa &amp; Clinic Booking + POS</h3>
       <p class="meta">Booking + point of sale &middot; Status: Vibe96 audit rejected; appeal submitted, awaiting reply &middot; Submission 665</p>
       <p><strong>Problem:</strong> Salons, spas and clinics need public booking, a staff calendar, and a simple till in one tool.</p>
       <p><strong>Stack:</strong> Python 3.12 standard library only, SQLite, server-rendered HTML.</p>
-      <p><a href="https://glowbook-demo.onrender.com">Try the live demo</a></p>
+      <p><a href="https://glowbook-demo.onrender.com">Try the live demo</a> <span class="hint">(free-tier hosting — it may take a moment to wake up)</span></p>
     </article>
 
-    <article class="card">
+    <article class="card" data-status="pending">
       <h3>New builds — November 4</h3>
       <p class="meta">Status: Built and test-verified locally; demos and submissions pending — not published, not sold</p>
       <p><strong>Problem:</strong> The same "one clear business tool" approach, applied to five more everyday businesses.</p>
@@ -110,13 +112,31 @@
   <section id="contact">
     <h2>Contact</h2>
     <p>This portfolio itself is the contact point for now:</p>
-    <p><a href="https://sinha-jts.netlify.app/">https://sinha-jts.netlify.app/</a></p>
-    <p class="note">No email address or phone number is listed here, because none was provided for this portfolio.</p>
+    <p><a href="https://tekoalymrs.github.io/sinha-jts-portfolio/">https://tekoalymrs.github.io/sinha-jts-portfolio/</a></p>
+    <p class="note">No email address or phone number is listed here, because none was provided for this portfolio. The older Netlify page is not linked here — it still shows placeholder projects.</p>
   </section>
 </main>
 
 <footer>
   <p>&copy; Sinha_jts — A.T.M. Mahfuzar Rahman Sinha. Built with a static site, no paid services.</p>
+  <p><a href="#about">Back to top</a></p>
 </footer>
+<script>
+(function(){
+  var buttons=document.querySelectorAll('.filter');
+  buttons.forEach(function(b){b.addEventListener('click',function(){
+    buttons.forEach(function(x){x.classList.remove('active');});
+    b.classList.add('active');
+    var f=b.getAttribute('data-filter');
+    document.querySelectorAll('#work .card').forEach(function(c){
+      c.style.display=(f==='all'||c.getAttribute('data-status')===f)?'':'none';
+    });
+  });});
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+  },{threshold:0.15});
+  document.querySelectorAll('section, .card').forEach(function(el){el.classList.add('reveal');io.observe(el);});
+})();
+</script>
 </body>
 </html>

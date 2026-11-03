@@ -16,11 +16,14 @@ body {
   line-height: 1.6;
 }
 .hero {
-  background: var(--navy);
+  background: linear-gradient(120deg, var(--navy), #123a5e, var(--navy));
+  background-size: 200% 200%;
+  animation: heroShift 12s ease-in-out infinite;
   color: #fff;
   text-align: center;
   padding: 2.5rem 1rem 2rem;
 }
+@keyframes heroShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 .logo {
   width: 160px;
   height: 160px;
@@ -28,7 +31,12 @@ body {
   border-radius: 50%;
   border: 4px solid var(--teal);
   background: #fff;
+  animation: logoPulse 2.4s ease-in-out infinite;
 }
+@keyframes logoPulse { 0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(14,165,160,.45); } 50% { transform: scale(1.04); box-shadow: 0 0 0 12px rgba(14,165,160,0); } }
+.stats { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 1.25rem; }
+.stats span { background: rgba(255,255,255,.08); border: 1px solid rgba(14,165,160,.6); border-radius: 999px; padding: .35rem .9rem; }
+.stats strong { color: #7fe3df; }
 .hero h1 { margin: 0.75rem 0 0; font-size: 2.4rem; letter-spacing: 0.02em; }
 .name { font-size: 1.1rem; margin: 0.25rem 0; color: #cfe8e7; }
 .tagline { max-width: 640px; margin: 0.75rem auto 0.25rem; }
@@ -45,6 +53,17 @@ h2 { border-bottom: 3px solid var(--teal); padding-bottom: 0.3rem; margin-bottom
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
   margin-bottom: 1.25rem;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(15,42,68,.14); }
+.filters { display: flex; gap: .5rem; flex-wrap: wrap; }
+.filter { border: 1px solid var(--teal); background: #fff; color: var(--navy); border-radius: 999px; padding: .35rem .9rem; cursor: pointer; }
+.filter.active, .filter:hover { background: var(--teal); color: #fff; }
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hero, .logo, .reveal, .card { animation: none; transition: none; }
+  .reveal { opacity: 1; transform: none; }
 }
 .card h3 { margin-top: 0; }
 .meta { color: var(--muted); font-size: 0.95rem; }
